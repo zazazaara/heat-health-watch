@@ -1,40 +1,36 @@
-# Heat-Health Risk Monitoring System
+# 🌡️ Heat Health Watch — Heat-Health Risk Monitoring System
 
-## Overview
+**An OOSE Mini Project | Python · Streamlit · Machine Learning**
 
-The **Heat-Health Risk Monitoring System** is a Python-based application designed to analyze environmental conditions and assess potential heat-health risks. It provides a dashboard for exploring historical data, calculating risk scores, classifying risk categories, and viewing experimental forecasts and simulated scenarios.
+Heat Health Watch is an interactive environmental monitoring and risk-assessment application designed around historical temperature, humidity, and air-quality data for Delhi. It combines data visualization, rule-based heat-health risk scoring, Random Forest classification, experimental forecasting, and simulated scenarios in a Streamlit dashboard.
 
-## Objectives
+## ✨ Key Features
 
-- Analyze historical weather and air-quality data.
-- Calculate a heat-health risk score using implemented rules.
-- Classify risk using a Machine Learning model.
-- Visualize environmental trends and risk patterns.
-- Explore experimental forecasting and simulated hourly scenarios.
-- Provide general advisories based on assessed risk categories.
+- **Overview Dashboard:** Displays historical environmental indicators, risk scores, and category distributions.
+- **Risk Calculator:** Calculates a project-defined risk score using maximum temperature, relative humidity, and AQI.
+- **Historical Trend Analysis:** Visualizes temperature, humidity, pollutant concentrations, and seasonal patterns.
+- **Random Forest Classifier:** Classifies historical environmental records into the dataset's Moderate and High labels.
+- **Experimental Forecasting:** Generates a synthetic continuation of historical data before estimating future environmental conditions and risk scores.
+- **Hourly Risk Simulation:** Displays an illustrative 24-hour risk profile generated from daily data.
+- **Synthetic Scenarios:** Generates demonstration records spanning five project-defined risk levels.
+- **Data Explorer:** Supports filtering, searching, inspecting, and exporting historical records.
+- **CSV Export:** Allows users to download filtered records, forecast estimates, and generated scenarios.
+- **Automated Tests:** Includes a pytest test suite for core functionality.
 
-## Features
+## 🛠️ Technology Stack
 
-- **Overview Dashboard:** Displays a summary of the available environmental data.
-- **Risk Calculator:** Calculates risk scores from environmental inputs.
-- **Risk Classification:** Uses a saved Random Forest model to predict risk categories.
-- **Trend Analysis:** Visualizes historical environmental patterns.
-- **Forecasting:** Provides experimental future estimates.
-- **Hourly Analysis:** Simulates hourly environmental conditions and risk periods.
-- **Synthetic Scenarios:** Generates artificial scenarios for analysis.
-- **Data Explorer:** Allows users to inspect the historical dataset.
+| Technology | Purpose |
+|---|---|
+| Python | Application logic and data processing |
+| Streamlit | Interactive dashboard |
+| Pandas | Data manipulation |
+| NumPy | Numerical operations |
+| Scikit-learn | Random Forest classification |
+| Plotly | Interactive visualizations |
+| Joblib | Saved model artifacts |
+| Pytest | Automated testing |
 
-## Technologies Used
-
-- Python
-- Streamlit
-- Pandas
-- NumPy
-- Scikit-learn
-- Plotly
-- Joblib
-
-## Project Structure
+## 📂 Project Structure
 
 ```text
 heat_health_watch_project_SRS_Aligned/
@@ -42,25 +38,52 @@ heat_health_watch_project_SRS_Aligned/
 ├── requirements.txt
 ├── README.md
 ├── data/
-├── docs/
+│   └── delhi_heatwave_airquality.csv
 ├── models/
-├── scripts/
+│   ├── rf_risk_classifier.joblib
+│   └── rf_metrics.json
 ├── src/
-└── tests/
+│   ├── config.py
+│   ├── data_loader.py
+│   ├── preprocessing.py
+│   ├── risk_scoring.py
+│   ├── risk_classifier.py
+│   ├── forecasting.py
+│   ├── hourly_analysis.py
+│   ├── synthetic_data.py
+│   ├── visualization.py
+│   └── advisories.py
+├── tests/
+├── docs/
+└── scripts/
 ```
 
 ### Main Components
 
 - `app.py` — Main Streamlit application.
-- `src/` — Data processing, risk scoring, classification, forecasting, visualization, and related modules.
+- `src/config.py` — Configuration and risk-related settings.
+- `src/data_loader.py` — Historical data loading and validation.
+- `src/preprocessing.py` — Data preparation and feature processing.
+- `src/risk_scoring.py` — Rule-based risk-score calculation and categorization.
+- `src/risk_classifier.py` — Random Forest classification and model evaluation.
+- `src/forecasting.py` — Experimental forecasting functionality.
+- `src/hourly_analysis.py` — Simulated hourly risk analysis.
+- `src/synthetic_data.py` — Synthetic scenario generation.
+- `src/visualization.py` — Charts and visualizations.
+- `src/advisories.py` — Category-based advisories.
 - `data/` — Historical environmental dataset.
-- `models/` — Saved Machine Learning model and evaluation artifacts.
-- `tests/` — Automated tests for project components.
+- `models/` — Saved model and evaluation artifacts.
+- `tests/` — Automated tests.
 - `docs/` — Project documentation.
 - `scripts/` — Supporting scripts.
-- `requirements.txt` — Python dependencies.
 
-## Installation and Execution
+## 🚀 Installation and Setup
+
+### Prerequisites
+
+- Python installed on your system
+- pip package manager
+- Git (for cloning the repository)
 
 ### 1. Clone the Repository
 
@@ -68,53 +91,147 @@ heat_health_watch_project_SRS_Aligned/
 git clone https://github.com/zazaaaara/heat-health-watch.git
 ```
 
-### 2. Open the Project Directory
+### 2. Navigate to the Project Directory
 
 ```bash
 cd heat-health-watch/heat_health_watch_project_SRS_Aligned
 ```
 
-### 3. Install Dependencies
+### 3. Create a Virtual Environment
 
 ```bash
+python -m venv .venv
+```
+
+### 4. Activate the Environment
+
+**Windows PowerShell**
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+If script execution is blocked, run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\.venv\Scripts\Activate.ps1
+```
+
+Then activate the environment again.
+
+### 5. Install Dependencies
+
+```bash
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-### 4. Run the Application
+### 6. Launch the Dashboard
 
 ```bash
 python -m streamlit run app.py
 ```
 
-The application should open in a browser using the local Streamlit address displayed in the terminal.
+Open the local URL displayed in the terminal if the dashboard does not open automatically.
 
-## Testing
-
-The project includes a `tests/` directory containing automated tests for key components, including data handling, risk scoring, classification, forecasting, and application functionality.
-
-Tests can be executed using:
+### 7. Run the Automated Tests
 
 ```bash
-python -m pytest
+python -m pytest -q
 ```
 
-## Limitations
+### Optional: Retrain the Random Forest Model
 
-- The application uses the environmental data available in the project.
-- Forecasts and hourly scenarios are experimental estimates or simulations.
-- Risk scores and categories are defined by the project's implemented logic.
-- Live sensor integration and automatic SMS/email alert delivery are not implemented.
-- The results are intended for educational and analytical purposes, not medical diagnosis.
+```bash
+python -m src.risk_classifier
+```
 
-## Future Scope
+Run this command only if the module supports direct execution and the required data and dependencies are available.
 
-- Integrate live weather and air-quality APIs.
-- Improve forecasting using additional time-series models.
-- Expand and validate the risk-classification dataset.
-- Add geographical heat-risk visualization.
-- Introduce automated alert notifications.
-- Deploy the application to a cloud platform.
+## 📊 Risk Scoring
 
-## Purpose
+The application calculates a project-defined Heat-Health Risk Score using weighted temperature, humidity, and air-quality components.
 
-This project demonstrates the use of Python, data analysis, Machine Learning, visualization, and software engineering practices to build a heat-health risk monitoring application.
+The implemented formula is represented as:
+
+\[
+S = 45N_T + 25N_H + 30\left(\frac{AQI}{500}\right)
+\]
+
+Where:
+
+- \(S\) represents the risk score.
+- \(N_T\) represents the normalized maximum-temperature component.
+- \(N_H\) represents the normalized relative-humidity component.
+- \(AQI\) represents the Air Quality Index.
+
+Five demonstration categories are defined in the project configuration: Very Low, Low, Moderate, High, and Severe.
+
+**Note:** Verify that the formula, normalization, and category names match `src/risk_scoring.py` and `src/config.py` before treating them as the final implementation details. These categories and thresholds are project-defined, not official medical or government risk classifications.
+
+## 🤖 Machine Learning
+
+The project uses a Random Forest classifier trained on environmental features from the historical dataset.
+
+The supplied dataset contains two target labels:
+
+- Moderate
+- High
+
+The classifier predicts these dataset labels. The separate rule-based scoring module generates the five project-defined risk categories.
+
+The model uses a chronological train-test split to evaluate performance on a later period of historical data. Its metrics measure agreement with the dataset labels; they do not establish clinical accuracy or predict whether an individual will become ill.
+
+## 🔮 Forecasting and Synthetic Data
+
+The forecasting module supports experimental estimates using historical observations and a generated synthetic continuation.
+
+- Historical observations end on **30 November 2024**.
+- Synthetic continuation rows are generated estimates, not recorded weather observations.
+- Future-date outputs are exploratory scenarios, not official weather forecasts.
+- Forecasts beyond approximately 30 days from the continuation are labelled illustrative scenarios.
+- Synthetic demonstration scenarios are separate from the historical dataset and are not used to train the Random Forest.
+- Hourly profiles are simulations because the source dataset contains daily rather than hourly observations.
+
+The application does not modify the original CSV file during its normal analysis workflow.
+
+## 🧪 Testing
+
+The project includes tests for core application components, including:
+
+- Data loading and validation
+- Risk-score calculations
+- Random Forest classification
+- Forecasting
+- Hourly simulation
+- Synthetic scenario generation
+- Application behaviour
+
+Run the test suite using:
+
+```bash
+python -m pytest -q
+```
+
+Test results depend on the current code, environment, dependencies, and test execution.
+
+## 🔭 Future Scope
+
+Potential improvements include:
+
+- Integration with live weather and air-quality APIs
+- More advanced time-series forecasting
+- Additional historical observations and external validation
+- Geographic risk visualization
+- Automated alerts and notifications
+- Database integration for persistent storage
+- Broader model testing and rolling-origin evaluation
+- Cloud deployment and improved scalability
+
+## ⚠️ Disclaimer
+
+This project is developed for educational and academic purposes. Its risk scores, advisories, synthetic data, and forecasts are not medical diagnoses or official environmental warnings.
+
+For real-world decisions, consult official guidance from the India Meteorological Department (IMD), the Central Pollution Control Board (CPCB), and relevant local health authorities.
+
